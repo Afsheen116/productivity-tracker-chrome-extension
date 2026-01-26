@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Productivity Tracker",
+  "description": "Tracks time spent on websites to improve productivity",
+  "version": "1.0",
+  "permissions": ["tabs", "storage"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}
