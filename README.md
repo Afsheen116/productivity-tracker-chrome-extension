@@ -78,3 +78,9 @@ Custom block list
 Backend integration for data sync
 
 Charts and analytics dashboard
+## 🧩 Learning Outcomes
+
+- Understood Chrome Extension architecture (Manifest v3)
+- Learned how background service workers operate
+- Gained hands-on experience with Chrome APIs
+- Practiced clean project setup and documentation
