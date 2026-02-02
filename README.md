@@ -84,3 +84,10 @@ Charts and analytics dashboard
 - Learned how background service workers operate
 - Gained hands-on experience with Chrome APIs
 - Practiced clean project setup and documentation
+## 🛠️ Development Status
+
+This project is being developed iteratively:
+- Initial MVP focused on setup and structure
+- Core tracking logic under development
+- Polishing and analytics planned next
+
