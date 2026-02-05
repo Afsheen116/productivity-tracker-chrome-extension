@@ -23,6 +23,16 @@ chrome.storage.local.get(null, (data) => {
 
     statsDiv.appendChild(div);
   }
+  const openBtn = document.getElementById("openDashboard");
+
+if (openBtn) {
+  openBtn.addEventListener("click", () => {
+    chrome.tabs.create({
+      url: chrome.runtime.getURL("dashboard.html")
+    });
+  });
+}
+
 });
 
 
