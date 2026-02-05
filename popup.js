@@ -1,11 +1,28 @@
-// Handles user interaction from the extension popup UI
+const statsDiv = document.getElementById("stats");
+const status = document.getElementById("status");
 
-const statusText = document.getElementById("status");
-const startBtn = document.getElementById("startBtn");
+status.textContent = "Tracking browsing time automatically ⏱️";
 
-startBtn.addEventListener("click", () => {
-  statusText.innerText = "Tracking active for this session";
-  startBtn.disabled = true;
-  startBtn.innerText = "Tracking...";
+chrome.storage.local.get(null, (data) => {
+  statsDiv.innerHTML = "";
+
+  if (!data || Object.keys(data).length === 0) {
+    statsDiv.textContent = "No data yet";
+    return;
+  }
+
+  for (const url in data) {
+    const timeMs = data[url];
+    const min = Math.floor(timeMs / 60000);
+    const sec = Math.floor((timeMs % 60000) / 1000);
+
+    const div = document.createElement("div");
+    div.textContent = `${url} → ${min}m ${sec}s`;
+    div.style.fontSize = "13px";
+    div.style.marginBottom = "6px";
+
+    statsDiv.appendChild(div);
+  }
 });
+
 
