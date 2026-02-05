@@ -3,7 +3,7 @@
   "name": "Productivity Tracker",
   "description": "Tracks time spent on websites to improve productivity",
   "version": "1.0",
-  "permissions": ["tabs", "storage"],
+  "permissions": ["tabs", "storage","activeTab"],
   "action": {
     "default_popup": "popup.html"
   },
