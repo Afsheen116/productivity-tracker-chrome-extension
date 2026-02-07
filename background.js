@@ -23,23 +23,28 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
     saveTimeSpent(currentUrl, timeSpent);
 }
 
-    try {
-        const tab = await chrome.tabs.get(activeInfo.tabId);
+    function getTodayKey() {
+  const today = new Date();
+  return today.toISOString().split("T")[0]; // YYYY-MM-DD
+}
 
-        if (tab.url) {
-            currentTabId = tab.id;
-            currentUrl = tab.url;
-            startTime = now;
+function saveTimeSpent(url, timeSpent) {
+  const todayKey = getTodayKey();
 
-            console.log("Active Tab Changed");
-            console.log("Tab ID:", currentTabId);
-            console.log("URL:", currentUrl);
-            console.log("Tracking started at:", new Date(startTime).toLocaleTimeString());
+  chrome.storage.local.get([todayKey, "ALL_TIME"], (result) => {
+    const todayData = result[todayKey] || {};
+    const allTimeData = result["ALL_TIME"] || {};
 
-        }
-    } catch (error) {
-        console.error("Error fetching tab info:", error);
-    }
+    todayData[url] = (todayData[url] || 0) + timeSpent;
+    allTimeData[url] = (allTimeData[url] || 0) + timeSpent;
+
+    chrome.storage.local.set({
+      [todayKey]: todayData,
+      ALL_TIME: allTimeData
+    });
+  });
+}
+
 });
 // Listen for window focus changes
 chrome.windows.onFocusChanged.addListener((windowId) => {
